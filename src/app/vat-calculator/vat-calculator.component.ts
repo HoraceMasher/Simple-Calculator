@@ -16,10 +16,13 @@ export class VatCalculatorComponent {
   taxableAmount: number = 0;
   totalAmount: number = 0;
   grossPay: number = 0;
+  showAccordion: boolean = false;
   vatInfo: string = '';
+  
 
   constructor(private vatService: VatService) {
     this.getVatRatesAndInfo();
+    
   }
 
   getVatRatesAndInfo(): void {
@@ -39,14 +42,18 @@ export class VatCalculatorComponent {
   }
 
   calculate(): void {
-    this.vatAmount = this.taxableAmount * (this.rate / 100);
-    this.vatAmountExcluded = this.taxableAmount / (1 + this.rate / 100) * (this.rate / 100);
+    const ratePercentage = this.rate / 100; 
+    this.vatAmount = this.taxableAmount * ratePercentage;
+    this.vatAmountExcluded = this.taxableAmount / (1 + ratePercentage) * ratePercentage;
     this.totalAmount = this.taxableAmount + this.vatAmount;
-
+  
     if (this.vatType === 'vatAdded') {
       this.grossPay = this.totalAmount;
     } else if (this.vatType === 'excludeVAT') {
       this.grossPay = this.taxableAmount - this.vatAmountExcluded;
     }
   }
+  toggleAccordion(): void {
+    this.showAccordion = !this.showAccordion;
+}
 }
