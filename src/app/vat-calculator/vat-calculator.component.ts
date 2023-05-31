@@ -16,36 +16,37 @@ export class VatCalculatorComponent {
   taxableAmount: number = 0;
   totalAmount: number = 0;
   grossPay: number = 0;
+  vatInfo: string = '';
 
-  constructor(private vatService: VatService) {}
+  constructor(private vatService: VatService) {
+    this.getVatRatesAndInfo();
+  }
+
+  getVatRatesAndInfo(): void {
+    this.vatService.getVatInfo().subscribe(
+      (response: any) => {
+        console.log('API response:', response);
+        this.vatInfo = response.vatInfo;
+      },
+      (error: any) => {
+        console.error('Error occurred while fetching VAT rates and info:', error);
+      }
+    );
+  }
 
   calculateGrossPay(): void {
-    this.vatService.getAmount().subscribe(amount => {
-      this.amount = amount;
-      this.calculate();
-    });
+    this.calculate();
   }
 
   calculate(): void {
-    this.vatAmount = this.amount * (this.rate / 100);
-    this.vatAmountExcluded = this.amount / (1 + this.rate / 100) * (this.rate / 100);
-    this.taxableAmount = this.amount;
-    this.totalAmount = this.amount + this.vatAmount;
+    this.vatAmount = this.taxableAmount * (this.rate / 100);
+    this.vatAmountExcluded = this.taxableAmount / (1 + this.rate / 100) * (this.rate / 100);
+    this.totalAmount = this.taxableAmount + this.vatAmount;
 
     if (this.vatType === 'vatAdded') {
       this.grossPay = this.totalAmount;
     } else if (this.vatType === 'excludeVAT') {
-      this.grossPay = this.amount - this.vatAmountExcluded;
+      this.grossPay = this.taxableAmount - this.vatAmountExcluded;
     }
-
-    this.roundDecimals();
-  }
-
-  roundDecimals(): void {
-    this.vatAmount = Number(this.vatAmount.toFixed(2));
-    this.vatAmountExcluded = Number(this.vatAmountExcluded.toFixed(2));
-    this.taxableAmount = Number(this.taxableAmount.toFixed(2));
-    this.totalAmount = Number(this.totalAmount.toFixed(2));
-    this.grossPay = Number(this.grossPay.toFixed(2));
   }
 }
