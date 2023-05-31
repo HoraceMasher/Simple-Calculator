@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NssfService } from 'src/app/nssf.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nssf-calculator',
@@ -8,18 +7,36 @@ import { Observable } from 'rxjs';
   styleUrls: ['./nssf-calculator.component.css']
 })
 export class NssfCalculatorComponent {
-  grossPay: number = 0;
-  nssfContributions: number | null = null;
-  employeeGrossPay: number | null = null;
-  employeeNetPay: number | null = null;
+  grossPay: number = 10000;
+  netPay: number = 0;
+  employeeNssfContribution: number = 0;
+  employerNssfContribution: number = 0;
+  nssfTotalContribution: number = 0;
+  nssInfo: string = "";
 
-  constructor(private nssfService: NssfService) {}
+  constructor(private nssfService: NssfService) {
+    this.getRatesAndInfo();
+  }
 
   calculateContributions(): void {
-    this.nssfService.calculateContributions(this.grossPay).subscribe(result => {
-      this.nssfContributions = result.contributions;
-      this.employeeGrossPay = result.employeeGrossPay;
-      this.employeeNetPay = result.employeeNetPay;
+    this.nssfService.calculateContributions(this.grossPay).subscribe(response => {
+      this.employeeNssfContribution = response.employeeContribution;
+      this.employerNssfContribution = response.employerContribution;
+      this.nssfTotalContribution = response.totalContribution;
+
+      this.calculateEmployeeNetPay();
+    });
+  }
+
+  calculateEmployeeNetPay(): void {
+    this.nssfService.calculateEmployeeNetPay(this.nssfTotalContribution).subscribe(response => {
+      this.netPay = response.netPay;
+    });
+  }
+
+  getRatesAndInfo(): void {
+    this.nssfService.getRatesAndInfo().subscribe(response => {
+      this.nssInfo = response.nssInfo;
     });
   }
 }
