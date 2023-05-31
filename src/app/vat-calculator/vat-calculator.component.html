@@ -5,21 +5,22 @@
     <input type="number" id="amount-input" [(ngModel)]="amount">
   </div>
   <div class="input-container">
-    <label for="rate-input">Rate:</label>
+    <label for="rate-input">Rate(%):</label>
     <input type="number" id="rate-input" [(ngModel)]="rate">
   </div>
   <div class="input-container">
     <label for="vat-type-select">VAT Type:</label>
     <select id="vat-type-select" [(ngModel)]="vatType">
       <option value="vatAdded">VAT Added</option>
-      <option value="vatDeducted">VAT Deducted</option>
+      <option value="excludeVAT">Exclude VAT</option>
     </select>
   </div>
   <button (click)="calculateGrossPay()">Calculate</button>
   <div class="result" *ngIf="grossPay !== 0">
-    <p>Taxable Amount (Net Pay): {{ taxableAmount }}</p>
+    <p>Initial Amount (Net Pay): {{ taxableAmount }}</p>
     <p>Total Amount (Gross Pay): {{ totalAmount }}</p>
-    <p>VAT Amount: {{ vatAmount }}</p>
-    <p>Gross Pay: {{ grossPay }}</p>
+    <p *ngIf="vatType === 'vatAdded'">VAT Amount: {{ vatAmount }}</p>
+    <p *ngIf="vatType === 'excludeVAT'">VAT Amount (Excluded): {{ vatAmountExcluded }}</p>
+    <p *ngIf="vatType === 'excludeVAT'">Net Price: {{ grossPay }}</p>
   </div>
 </div>
