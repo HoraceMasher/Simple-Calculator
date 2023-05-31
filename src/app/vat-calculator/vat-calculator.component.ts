@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { VatService } from 'src/app/vat.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-vat-calculator',
@@ -15,7 +17,16 @@ export class VatCalculatorComponent {
   totalAmount: number = 0;
   grossPay: number = 0;
 
+  constructor(private vatService: VatService) {}
+
   calculateGrossPay(): void {
+    this.vatService.getAmount().subscribe(amount => {
+      this.amount = amount;
+      this.calculate();
+    });
+  }
+
+  calculate(): void {
     this.vatAmount = this.amount * (this.rate / 100);
     this.vatAmountExcluded = this.amount / (1 + this.rate / 100) * (this.rate / 100);
     this.taxableAmount = this.amount;

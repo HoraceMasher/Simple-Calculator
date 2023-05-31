@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { enviroment } from 'src/app/contants/environments'
+import { environment } from './contants/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VatService {
+  private baseUrl: string = environment.baseUrl;
 
-  baseUrl:string = enviroment.baseUrl; 
   constructor(private http: HttpClient) {}
 
   getAmount(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/vat/amount`);
+    return this.http.get<number>(`${this.baseUrl}/calculator/vat/amount`);
   }
 
   getRate(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/vat/rate`);
+    return this.http.get<number>(`${this.baseUrl}/calculator/vat/rate`);
   }
 
   getRatesAndInfo(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/vat/rates-and-info`);
+    return this.http.get<any>(`${this.baseUrl}/calculator/vat/rates-and-info`);
   }
 
   getTaxableAmount(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/vat/taxable-amount`);
+    return this.http.get<number>(`${this.baseUrl}/calculator/vat/taxable-amount`);
   }
 
   getTotalAmount(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/vat/total-amount`);
+    return this.http.get<number>(`${this.baseUrl}/calculator/vat/total-amount`);
   }
 }
