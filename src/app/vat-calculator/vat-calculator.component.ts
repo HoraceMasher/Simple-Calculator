@@ -26,7 +26,8 @@ export class VatCalculatorComponent {
   }
 
   getVatRatesAndInfo(): void {
-    this.vatService.getVatInfo().subscribe(
+    this.vatService.getVatInfo()
+    .subscribe(
       (response: any) => {
         console.log('API response:', response);
         this.vatInfo = response.vatInfo;
