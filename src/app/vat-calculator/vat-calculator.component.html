@@ -1,6 +1,35 @@
-<div class="vat-calculator">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">ArCalc</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/vat-calculator">VAT Calculator</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/nssf-calculator">NSSF Calculator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/loan-calculator">Loan Calculator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-  <h2>VAT Calculator</h2>
+<div class="container mt-5">
+  <h2 class="my-4">VAT Calculator</h2>
+
   <div class="accordion">
     <button class="accordion-button" (click)="toggleAccordion()">VAT Rates and General Info</button>
     <div class="accordion-content" *ngIf="showAccordion">
@@ -8,29 +37,58 @@
     </div>
   </div>
 
-  
-  <div class="input-container">
-    <label for="amount-input">Amount:</label>
-    <input type="number" id="amount-input" [(ngModel)]="taxableAmount">
+  <form [formGroup]="vatForm" (ngSubmit)="calculateGrossPay()">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label for="amount-input" class="form-label">Amount:</label>
+        <input type="number" id="amount-input" class="form-control" formControlName="taxableAmount">
+      </div>
+      <div class="col-md-4">
+        <label for="rate-input" class="form-label">Rate(%):</label>
+        <input type="number" id="rate-input" class="form-control" formControlName="rate">
+      </div>
+      <div class="col-md-4">
+        <label for="vat-type-select" class="form-label">VAT Type:</label>
+        <select id="vat-type-select" class="form-select" formControlName="vatType">
+          <option value="vatAdded">VAT Added</option>
+          <option value="vatIncluded">VAT Included</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">Calculate</button>
+    </div>
+  </form>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <h5>Gross Pay:</h5>
+      <p>{{ grossPay }}</p>
+    </div>
+    <div class="col-md-4">
+      <h5>VAT Amount:</h5>
+      <p>{{ vatAmount }}</p>
+    </div>
+    <div class="col-md-4">
+      <h5>Total Amount:</h5>
+      <p>{{ totalAmount }}</p>
+    </div>
   </div>
-  <div class="input-container">
-    <label for="rate-input">Rate(%):</label>
-    <input type="number" id="rate-input" [(ngModel)]="rate">
+
+  <div class="mt-5">
+    <h3>How to Use the Calculator</h3>
+    <p>
+      This VAT Calculator allows you to calculate the Gross Pay, VAT Amount, and Total Amount based on the given
+      taxable amount, rate, and VAT type.
+    </p>
+    <p>
+      Enter the amount and rate in the respective input fields. Select the VAT type (VAT Added or VAT Included) from
+      the dropdown. Click the "Calculate" button to perform the calculation. The results will be displayed below.
+    </p>
   </div>
-  <div class="input-container">
-    <label for="vat-type-select">VAT Type:</label>
-    <select id="vat-type-select" [(ngModel)]="vatType">
-      <option value="vatAdded">VAT Added</option>
-      <option value="excludeVAT">Exclude VAT</option>
-    </select>
-  </div>
-  <button (click)="calculateGrossPay()">Calculate</button>
-  <div class="result" *ngIf="totalAmount !== 0">
-    <p>Initial Amount (Net Pay): {{ taxableAmount | number }}</p>
-    <p>Total Amount (Gross Pay): {{ totalAmount | number }}</p>
-    <p *ngIf="vatType === 'vatAdded'">VAT Amount: {{ vatAmount | number }}</p>
-    <p *ngIf="vatType === 'excludeVAT'">VAT Amount (Excluded): {{ vatAmountExcluded | number }}</p>
-    <p *ngIf="vatType === 'excludeVAT'">Net Price: {{ grossPay | number }}</p>
-  </div>
- 
 </div>
+
+<footer class="bg-dark text-light text-center py-3 mt-5">
+  <p>&copy; 2023 Your Company. All rights reserved.</p>
+</footer>

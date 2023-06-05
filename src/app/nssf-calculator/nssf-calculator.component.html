@@ -1,16 +1,83 @@
-<div class="nssf-calculator">
-  <h2>NSSF Calculator</h2>
-  <div class="input-container">
-    <label for="gross-pay-input">Gross Pay:</label>
-    <input type="number" id="gross-pay-input" [(ngModel)]="grossPay">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">ArCalc</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/vat-calculator">VAT Calculator</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/nssf-calculator">NSSF Calculator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/loan-calculator">Loan Calculator</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <button (click)="calculateContributions()">Calculate</button>
-  <div class="result" *ngIf="netPay !== 0">
-    <p>NSSF Contributions:</p>
-    <ul>
-      <li>Employee Contribution: {{ employeeNssfContribution }}</li>
-      <li>Employer Contribution: {{ employerNssfContribution }}</li>
-    </ul>
-    <p>Employee Net Pay: {{ netPay }}</p>
+</nav>
+
+<div class="container mt-5">
+  <h2>NSSF Calculator</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Gross Pay</h5>
+          <div class="form-group">
+            <label for="grossPay">Enter Gross Pay</label>
+            <input type="number" class="form-control" id="grossPay" [(ngModel)]="grossPay" name="grossPay" required>
+          </div>
+          <button class="btn btn-primary mt-3" (click)="calculateNssfContributions()">Calculate Contributions</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">NSSF Contributions</h5>
+          <p class="card-text">Employer Contribution: {{ employerContribution }}</p>
+          <p class="card-text">Employee Contribution: {{ employeeContribution }}</p>
+          <p class="card-text">Total Contribution: {{ nssfTotalContribution }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Employee Net Pay</h5>
+          <p class="card-text">Net Pay: {{ employeeNetPay }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<div class= "container" mt-5>
+  <h3>How to Use the Calculator</h3>
+  <p>
+    This NSSF Calculator allows you to calculate the NSSF contributions based on the given gross pay.
+  </p>
+  <p>
+    Enter the gross pay amount in the input field and click the "Calculate Contributions" button to perform the calculation.
+    The employer and employee contributions, as well as the total contribution, will be displayed.
+  </p>
+
+  <footer class="bg-light text-dark text-center py-3 mt-5">
+    <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
+  </footer>
+
+</div>
+

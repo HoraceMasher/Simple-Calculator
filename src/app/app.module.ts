@@ -4,24 +4,31 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VatCalculatorComponent } from './vat-calculator/vat-calculator.component';
-import { FormsModule } from '@angular/forms';
+import { VatService } from './vat-calculator/vat.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NssfCalculatorComponent } from './nssf-calculator/nssf-calculator.component';
+import { NssfService } from './nssf-calculator/nssf.service';
+import { FormControl } from '@angular/forms';
+import { LoanCalculatorComponent } from './loan-calculator/loan-calculator.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     VatCalculatorComponent,
     HomeComponent,
     NssfCalculatorComponent,
+    LoanCalculatorComponent
   
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [NssfService , VatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
