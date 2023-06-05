@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { VatService } from './vat.service';
 
 @Component({
@@ -9,56 +9,46 @@ import { VatService } from './vat.service';
 })
 export class VatCalculatorComponent implements OnInit {
   vatForm: FormGroup;
-  taxableAmount: number = 0;
-  rate: number = 0;
-  vatType: string = 'vatAdded';
+  netAmount: number = 0;
+  vatRate: number = 0;
   vatAmount: number = 0;
-  grossPay: number = 0;
   totalAmount: number = 0;
   showAccordion: boolean = false;
   vatInfo: string = '';
+  response: any;
 
-  constructor(private formBuilder: FormBuilder, private vatService: VatService) {
+  constructor(private vatService: VatService, private formBuilder: FormBuilder) {
     this.vatForm = this.formBuilder.group({
-      taxableAmount: [0, Validators.required],
-      rate: [0, Validators.required],
-      vatType: ['vatAdded']
+      netAmount: [null, Validators.required]
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.vatForm.valueChanges.subscribe((val: any) => {
+      if (val) {
+        console.log(val);
+      }
+    });
+  }
 
   toggleAccordion(): void {
     this.showAccordion = !this.showAccordion;
   }
 
-  calculateGrossPay(): void {
+  calculateVat() {
     if (this.vatForm.valid) {
-      this.taxableAmount = this.vatForm.get('taxableAmount')?.value || 0;
-      this.rate = this.vatForm.get('rate')?.value || 0;
-      this.vatType = this.vatForm.get('vatType')?.value || 'vatAdded';
-
-      this.calculateVATAmount();
-      this.calculateTotalAmount();
-      this.calculateGrossPayAmount();
+      this.vatService.calculateVat(this.vatForm.value).subscribe(
+        result => {
+          this.netAmount = result.netAmount;
+          this.totalAmount = result.totalAmount;
+          this.vatAmount = result.vatAmount;
+          console.log(result);
+          this.response = result;
+        },
+        error => {
+          console.error('Error Calculating VAT:', error);
+        }
+      );
     }
-  }
-
-  calculateVATAmount(): void {
-    this.vatService.calculateVATAmount(this.taxableAmount, this.rate)
-      .then((vatAmount: number) => {
-        this.vatAmount = vatAmount;
-      })
-      .catch((error) => {
-        console.error('Failed to calculate VAT amount:', error);
-      });
-  }
-
-  calculateTotalAmount(): void {
-    this.totalAmount = this.vatService.calculateTotalAmount(this.taxableAmount, this.vatAmount);
-  }
-
-  calculateGrossPayAmount(): void {
-    this.grossPay = this.vatService.calculateGrossPayAmount(this.taxableAmount, this.vatAmount);
   }
 }

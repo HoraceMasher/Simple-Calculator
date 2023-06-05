@@ -30,7 +30,12 @@
 <div class="container mt-5">
   <h2>NSSF Calculator</h2>
 
- 
+  <div class="accordion">
+    <button class="accordion-button" (click)="toggleAccordion()">What To Know About NSSF</button>
+    <div class="accordion-content" *ngIf="showAccordion">
+      <p>{{ response.nssInfo }}</p>
+    </div>
+  </div>
   <div class="row">
     <form [formGroup]="nssfForm" (ngSubmit)="calculateNssf()" class="mt-4">
     <div class="col-md-6">

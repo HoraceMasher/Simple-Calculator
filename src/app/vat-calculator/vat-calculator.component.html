@@ -33,46 +33,39 @@
   <div class="accordion">
     <button class="accordion-button" (click)="toggleAccordion()">VAT Rates and General Info</button>
     <div class="accordion-content" *ngIf="showAccordion">
-      <p>{{ vatInfo }}</p>
+      <p>{{ response.vatInfo }}</p>
     </div>
   </div>
 
-  <form [formGroup]="vatForm" (ngSubmit)="calculateGrossPay()">
+  <form [formGroup]="vatForm" (ngSubmit)="calculateVat()">
     <div class="row g-3">
       <div class="col-md-4">
         <label for="amount-input" class="form-label">Amount:</label>
-        <input type="number" id="amount-input" class="form-control" formControlName="taxableAmount">
-      </div>
-      <div class="col-md-4">
-        <label for="rate-input" class="form-label">Rate(%):</label>
-        <input type="number" id="rate-input" class="form-control" formControlName="rate">
-      </div>
-      <div class="col-md-4">
-        <label for="vat-type-select" class="form-label">VAT Type:</label>
-        <select id="vat-type-select" class="form-select" formControlName="vatType">
-          <option value="vatAdded">VAT Added</option>
-          <option value="vatIncluded">VAT Included</option>
-        </select>
+        <input type="number" id="netAmount" class="form-control" formControlName="netAmount">
       </div>
     </div>
 
-    <div class="text-center mt-4">
+    <div class="text-center mt-3">
       <button type="submit" class="btn btn-primary">Calculate</button>
     </div>
   </form>
 
-  <div class="row mt-4">
+  <div class="row mt-4" *ngIf="response">
     <div class="col-md-4">
-      <h5>Gross Pay:</h5>
-      <p>{{ grossPay }}</p>
+      <h5>Taxable Amount:</h5>
+      <p>{{ response.taxableAmount }}</p>
+    </div>
+    <div class="col-md-4">
+      <h5>VAT Rate:</h5>
+      <p>{{ response.vatRate }}</p>
     </div>
     <div class="col-md-4">
       <h5>VAT Amount:</h5>
-      <p>{{ vatAmount }}</p>
+      <p>{{ response.vatAmount }}</p>
     </div>
     <div class="col-md-4">
       <h5>Total Amount:</h5>
-      <p>{{ totalAmount }}</p>
+      <p>{{ response.totalAmount }}</p>
     </div>
   </div>
 

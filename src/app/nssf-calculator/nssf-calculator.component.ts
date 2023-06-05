@@ -15,6 +15,9 @@ export class NssfCalculatorComponent implements OnInit {
   employeeNssfContribution: number = 0;
   nssfTotalContribution: number = 0;
   netPay: number = 0;
+  totalAmount: number = 0;
+  showAccordion: boolean = false;
+  nssInfo: string ="";
   response: any;
 
   constructor(private nssfService: NssfService) {
@@ -30,7 +33,10 @@ export class NssfCalculatorComponent implements OnInit {
       }
     })
   }
-
+ 
+  toggleAccordion(): void {
+    this.showAccordion = !this.showAccordion;
+  }
   calculateNssf() {
     if (this.nssfForm.valid) {
       this.nssfService.calculateNssf(this.nssfForm.value).subscribe(
