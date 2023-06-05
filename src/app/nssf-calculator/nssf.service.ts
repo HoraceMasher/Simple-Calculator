@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../constants/environments';
 
@@ -11,15 +11,12 @@ export class NssfService {
 
   constructor(private http: HttpClient) {}
 
-  getNssfInfo(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/calculator/nssf/employee-net-pay`);
-  }
+  calculateNssf(nssfData: any): Observable<any> {
+    const url =(`${this.baseUrl}/calculator/nssf/contributions`);
+    const params = new HttpParams ()
+    .set('grossPay', nssfData.grossPay)
 
-  calculateContributions(grossPay: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/calculator/nssf/contributions`, { params: { grossPay: grossPay.toString() } });
+    console.log(this.http.get(url, {params}))
+    return this.http.get(url, {params})
   }
-
-  calculateEmployeeNetPay(nssfTotalContribution: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/calculator/nssf/employee-net-pay`, { params: { nssfTotalContribution: nssfTotalContribution.toString() } });
   }
-}

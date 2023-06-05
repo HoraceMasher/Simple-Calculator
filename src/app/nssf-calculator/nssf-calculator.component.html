@@ -29,49 +29,47 @@
 
 <div class="container mt-5">
   <h2>NSSF Calculator</h2>
+
+ 
   <div class="row">
+    <form [formGroup]="nssfForm" (ngSubmit)="calculateNssf()" class="mt-4">
     <div class="col-md-6">
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">Gross Pay</h5>
           <div class="form-group">
             <label for="grossPay">Enter Gross Pay</label>
-            <input type="number" class="form-control" id="grossPay" [(ngModel)]="grossPay" name="grossPay" required>
+            <input type="number" class="form-control" id="grossPay" formControlName="grossPay">
           </div>
-          <button class="btn btn-primary mt-3" (click)="calculateNssfContributions()">Calculate Contributions</button>
+          <button class="btn btn-primary mt-3" type="submit">Calculate Contributions</button>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    </form>
+    <div class="col-md-6" *ngIf="response">
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="card-title">NSSF Contributions</h5>
-          <p class="card-text">Employer Contribution: {{ employerContribution }}</p>
-          <p class="card-text">Employee Contribution: {{ employeeContribution }}</p>
-          <p class="card-text">Total Contribution: {{ nssfTotalContribution }}</p>
+          <h5 class="card-title">Resuly Details</h5>
+          <p class="card-text">Employee Rate: <span>{{response.EMPLOYEE_RATE}}</span></p>
+          <p class="card-text">Net Pay: <span>{{ response.netPay }}</span></p>
+          <p class="card-text">Employer Rate: <span>{{response.EMPLOYER_RATE}}</span></p>
+          <p class="card-text">Contribution: <span>{{ response.employerNssfContribution }}</span></p>
+          <p class="card-text">Employee Contribution: <span>{{ response.employeeNssfContribution }}</span></p>
+          <p class="card-text">Total Contribution: <span>{{ response.nssfTotalContribution }}</span></p>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Employee Net Pay</h5>
-          <p class="card-text">Net Pay: {{ employeeNetPay }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<div class= "container" mt-5>
+<div class="container mt-5">
   <h3>How to Use the Calculator</h3>
   <p>
     This NSSF Calculator allows you to calculate the NSSF contributions based on the given gross pay.
   </p>
   <p>
-    Enter the gross pay amount in the input field and click the "Calculate Contributions" button to perform the calculation.
+    Enter the gross pay amount
+
+ in the input field and click the "Calculate Contributions" button to perform the calculation.
     The employer and employee contributions, as well as the total contribution, will be displayed.
   </p>
 
@@ -80,4 +78,3 @@
   </footer>
 
 </div>
-
