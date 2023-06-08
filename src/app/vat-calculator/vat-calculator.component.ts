@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VatService } from './vat.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class VatCalculatorComponent implements OnInit {
   showAccordion: boolean = false;
   vatInfo: string = '';
   response: any;
+  imagePath = 'assets/VAT(1).png';
 
   constructor(private vatService: VatService, private formBuilder: FormBuilder) {
     this.vatForm = this.formBuilder.group({

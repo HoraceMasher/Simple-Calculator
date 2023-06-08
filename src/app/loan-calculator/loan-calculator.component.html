@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" routerLink="/">ArCalc</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon bi bi-list"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
@@ -28,6 +28,8 @@
 </nav>
 
 <div class="container mt-5">
+  <div class="card p-4" style="background-color: #f9f9f9;">
+  
   <h2>Loan Calculator</h2>
 
   <form [formGroup]="loanForm" (ngSubmit)="calculateLoan()" class="mt-4">
@@ -44,6 +46,15 @@
           <input type="number" id="interestRate" class="form-control" formControlName="ratePerMonth">
         </div>
       </div>
+      <div class="form-group mt-4">
+        <label for="paymentInterval">Interval:</label>
+        <select id="paymentInterval" class="form-control" formControlName="intervalOption">
+          <option value=4>Days</option>
+          <option value=3>Weeks</option>
+          <option value=2>Months</option>
+          <option value=1>Years</option>
+        </select>
+      </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="time">Time:</label>
@@ -51,74 +62,34 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="paymentInterval">Interval:</label>
-          <select id="paymentInterval" class="form-control" formControlName="intervalOption">
-            <option value=4>Days</option>
-            <option value=3>Weeks</option>
-            <option value=2>Months</option>
-            <option value=1>Years</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <button type="submit" class="btn btn-primary mt-4">Calculate Loan</button>
-      </div>
-    </div>
+    <button type="submit" class="btn btn-primary mt-4">Calculate Loan</button>
   </form>
-
-  <div class="result mt-5" *ngIf="response">
-    <div class="result-grid">
-      <div class="result-item">
-        <p class="result-label">Total Amount:</p>
-        <p class="result-value">{{response.amount}}</p>
-      </div>
-      <div class="result-item">
-        <p class="result-label">Total Interest:</p>
-        <p class="result-value">{{response.interest}}</p>
-      </div>
-      <div class="result-item">
-        <p class="result-label">Principal:</p>
-        <p class="result-value">{{response.principal}}</p>
-      </div>
-      <div class="result-item">
-        <p class="result-label">Rate:</p>
-        <p class="result-value">{{response.rate}}</p>
-      </div>
-      <!-- <div class="result-item">
-        <p class="result-label">Term(Months):</p>
-        <p class="result-value">{{response.term}}</p>
-      </div> -->
-      <div class="result-item">
-        <p class="result-label">Time:</p>
-        <p class="result-value">{{response.timeOption.time}}</p>
-      </div>
-      <div class="result-item">
-        <p class="result-label">Period:</p>
-        <p class="result-value">{{response.timeOption.period}}</p>
-      </div>
-    </div>
   </div>
-</div>
+  <div class="result mt-5" *ngIf="response">
+    <p>Total Amount: <span>{{response.amount}}</span></p>
+    <p>Total Interest: <span>{{response.interest}}</span></p>
+    <p>Principal: <span>{{response.principal}}</span></p>
+    <p>Rate: <span>{{response.rate}}</span></p>
+    <p>Term: <span>{{response.term}}</span></p>
+    <p>Time: <span>{{response.timeOption.time}}</span></p>
+    <p>Period: <span>{{response.timeOption.period}}</span></p>
+  </div>
 
-<div class="container mt-5">
-  <h3>How to Use the Calculator</h3>
-  <p>
-    This Loan Calculator allows you to calculate the monthly payment and total payment based on the given
-    loan amount, interest rate, loan term, term unit, and payment interval.
-  </p>
-  <p>
-    Enter the loan amount, interest rate, loan term, term unit (days, weeks, months, years), and payment interval
-    (daily, weekly, monthly).
-    Click the "Calculate Loan" button to perform the calculation. The monthly payment and total payment will be
-    displayed below.
-  </p>
-</div>
 
-<footer class="bg-light text-dark text-center py-3 mt-5">
-  <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
-</footer>
+  <div class="container mt-5">
+    <h3>How to Use the Calculator</h3>
+    <p>
+      This Loan Calculator allows you to calculate the monthly payment and total payment based on the given
+      loan amount, interest rate, loan term, term unit, and payment interval.
+    </p>
+    <p>
+      Enter the loan amount, interest rate, loan term, term unit (days, weeks, months, years), and payment interval
+      (daily, weekly, monthly).
+      Click the "Calculate Loan" button to perform the calculation. The monthly payment and total payment will be
+      displayed below.
+    </p>
+  </div>
+
+  <footer class="bg-light text-dark text-center py-3 mt-5">
+    <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
+  </footer>

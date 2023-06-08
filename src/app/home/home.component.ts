@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-[x: string]: any;
+
+  isHovered: boolean = false;
+
+toggleHover(hovered: boolean) {
+  this.isHovered = hovered;
+}
 }

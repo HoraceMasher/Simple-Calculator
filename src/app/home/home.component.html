@@ -1,19 +1,20 @@
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" routerLink="/">ArCalc</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon bi bi-list"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/vat-calculator">VAT Calculator</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/nssf-calculator">NSSF Calculator</a>
         </li>
         <li class="nav-item">
@@ -27,46 +28,130 @@
   </div>
 </nav>
 
-<div class="homepage">
+
+
+<section class="hero-section">
+  <div class="container text-center">
+    <h1 class="display-4">Welcome to ArCalc</h1>
+    <p class="lead">Powerful calculators for VAT, NSSF, and loans</p>
+    <a href="/vat-calculator" class="btn btn-primary btn-lg">Get Started</a>
+  </div>
+</section>
+
+<section class="features-section">
   <div class="container">
-    <h2 class="text-center">Welcome to ArCalc</h2>
+    <h2 class="text-center">Key Features</h2>
     <div class="row">
       <div class="col-md-4">
-        <div class="card mb-4 text-center" style="animation: fadeIn 1s;">
-          <div class="card-body">
-            <h3 class="card-title">VAT Calculator</h3>
-            <p class="card-text">Calculate VAT, net price, and total price based on an amount and VAT rate.</p>
-            <a href="/vat-calculator" class="btn btn-primary">Go to VAT Calculator</a>
-          </div>
+        <div class="feature-card " [class.hovered]="isHovered" (mouseenter)="toggleHover(true)" (mouseleave)="toggleHover(false)">
+          <i class="bi bi-cash-stack"></i>
+          <h3>VAT Calculator</h3>
+          <p>Calculate VAT, net price, and total price based on an amount and VAT rate.</p>
+          <a href="/vat-calculator" class="btn btn-primary">Go to VAT Calculator</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card mb-4 text-center" style="animation: fadeIn 1s;">
-          <div class="card-body">
-            <h3 class="card-title">NSSF Calculator</h3>
-            <p class="card-text">Calculate NSSF contributions, employee gross pay, and employee net pay based on gross pay.</p>
-            <a href="/nssf-calculator" class="btn btn-primary">Go to NSSF Calculator</a>
-          </div>
+        <div class="feature-card"  [class.hovered]="isHovered" (mouseenter)="toggleHover(true)" (mouseleave)="toggleHover(false)">
+          <i class="bi bi-currency-dollar"></i>
+          <h3>NSSF Calculator</h3>
+          <p>Calculate NSSF contributions, employee gross pay, and employee net pay based on gross pay.</p>
+          <a href="/nssf-calculator" class="btn btn-primary">Go to NSSF Calculator</a>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card mb-4 text-center" style="animation: fadeIn 1s;">
-          <div class="card-body">
-            <h3 class="card-title">Loan Calculator</h3>
-            <p class="card-text">Calculate loan interest, payments per schedule, and total amount to be paid over a loan span.</p>
-            <a href="/loan-calculator" class="btn btn-primary">Go to Loan Calculator</a>
-          </div>
+        <div class="feature-card"  [class.hovered]="isHovered" (mouseenter)="toggleHover(true)" (mouseleave)="toggleHover(false)">
+          <i class="bi bi-calculator"></i>
+          <h3>Loan Calculator</h3>
+          <p>Calculate loan interest, payments per schedule, and total amount to be paid over a loan span.</p>
+          <a href="/loan-calculator" class="btn btn-primary">Go to Loan Calculator</a>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<footer class="footer mt-auto py-3 bg-light">
+<!-- About Us Section -->
+<section class="about-us-section">
   <div class="container">
-    <span class="text-muted">&copy; 2023 Arxcess Software. All rights reserved.</span>
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="section-title">About Arxcess Software</h2>
+        <p class="section-description">We are an innovative customer-centric team that digitalizes your business needs, enabling you to gain insights into your potential as you grow your business. At Arxcess Software, we believe in creating software solutions that empower businesses to streamline their operations, enhance efficiency, and drive growth.</p>
+        <p class="section-description">With a focus on user-centric design and cutting-edge technology, we develop scalable and customizable software products that cater to the specific needs of different industries. Our solutions are built to deliver a seamless user experience and provide actionable insights for informed decision-making.</p>
+        <a target="_blank" href="https://www.arxcess.com" class="btn btn-primary">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products Section -->
+<section class="products-section">
+  <div class="container">
+    <h2 class="text-center">Our Products</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="product-card card1">
+          <h3>Arxcess Banking</h3>
+          <p>Streamline your banking operations with our comprehensive banking software solution.</p>
+          <a target="_blank" href="https://www.arxcess.com/products/banking" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="product-card card2">
+          <h3>Arxcess ERP</h3>
+          <p>Manage your business processes efficiently with our powerful Enterprise Resource Planning system.</p>
+          <a target="_blank" href="https://erp.arxcess.com/" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="product-card card3">
+          <h3>Arxcess HR</h3>
+          <p>Optimize your human resources management with our comprehensive HR software suite.</p>
+          <a target="_blank" href="https://hr.arxcess.com" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Footer-->
+<footer class="footer mt-auto py-3 bg-dark text-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h3>Our Products</h3>
+        <ul>
+          <li><a target="_blank" href="https://www.arxcess.com/products/banking">Arxcess Banking</a></li>
+          <li><a target="_blank" href="https://erp.arxcess.com/">Arxcess ERP</a></li>
+          <li><a target="_blank" href="https://hr.arxcess.com/">Arxcess HR</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3>Our Services</h3>
+        <ul>
+          <li><a  target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
+          <li><a  target="_blank" href="/support">Support & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a  href="/about">About Us</a></li>
+          <li><a target="_blank" href="https://www.arxcess.com/landing#contact">Contact Us</a></li>
+          <li><a  href="/privacy-policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3>Contacts</h3>
+        <p>Makerere Kikoni B</p>
+        <p>Kampala</p>
+        <p>Uganda</p>
+
+        <p>Email: info@arxcess.com</p>
+        <p>Phone: +256 708-774-766</p>
+      </div>
+    </div>
+    <hr> 
+    <p class="text-light text-center  ">&copy; 2023 Arxcess Software. All rights reserved.</p>
   </div>
 </footer>
-
-
-  

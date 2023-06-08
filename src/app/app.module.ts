@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { NssfCalculatorComponent } from './nssf-calculator/nssf-calculator.component';
 import { NssfService } from './nssf-calculator/nssf.service';
-import { FormControl } from '@angular/forms';
 import { LoanCalculatorComponent } from './loan-calculator/loan-calculator.component';
 
 @NgModule({
