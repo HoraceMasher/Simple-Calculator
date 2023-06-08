@@ -1,10 +1,31 @@
 
+  /* Navbar */
+.navbar {
+    background-color: #383636;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar .navbar-brand {
+    font-weight: bold;
+  }
+  
+  .navbar-toggler-icon {
+    color: #000;
+  }
+  
+  .navbar-nav .nav-item .nav-link {
+    color: #000;
+  }
+  
+  .navbar-nav .nav-item.active .nav-link {
+    color: #1b4f86;
+  }
   
   .card {
     margin-bottom: 20px;
   }
   
-  /* Style the VAT calculation section */
+  
   .vat-calculation-section {
     padding: 20px;
     background-color: #f7f7f7;
@@ -25,7 +46,7 @@
     margin-bottom: 20px;
   }
   
-  /* Style the result display section */
+
   .result-display-section {
     padding: 20px;
     background-color: #ffffff;
@@ -53,7 +74,7 @@
     border-color: #6c757d;
   }
   
-  .footer h5 {
+  .footer h3 {
     font-weight: bold;
     margin-bottom: 20px;
   }

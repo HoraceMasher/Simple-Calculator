@@ -1,3 +1,4 @@
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
     <a class="navbar-brand" routerLink="/">ArCalc</a>
@@ -6,14 +7,14 @@
       <span class="navbar-toggler-icon bi bi-list"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/vat-calculator">VAT Calculator</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/nssf-calculator">NSSF Calculator</a>
         </li>
         <li class="nav-item">
@@ -27,18 +28,19 @@
   </div>
 </nav>
 
-<div class="container mt-5">
+<section>
+<div class="container col mt-5">
   <h2>NSSF Calculator</h2>
 
   <div class="accordion">
     <button class="accordion-button" (click)="toggleAccordion()">What To Know About NSSF</button>
-    <div class="accordion-content" *ngIf="showAccordion">
+    <div class="accordion-content pt-3" *ngIf="response">
       <p>{{ response.nssInfo }}</p>
     </div>
   </div>
   <div class="row">
     <form [formGroup]="nssfForm" (ngSubmit)="calculateNssf()" class="mt-4">
-    <div class="col-md-6">
+    <div class="col">
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">Gross Pay</h5>
@@ -51,10 +53,10 @@
       </div>
     </div>
     </form>
-    <div class="col-md-6" *ngIf="response">
+    <!-- <div class="col" *ngIf="response">
       <div class="card mb-3">
         <div class="card-body">
-          <h5 class="card-title">Resuly Details</h5>
+          <h5 class="card-title">Result Details</h5>
           <p class="card-text">Employee Rate: <span>{{response.EMPLOYEE_RATE}}</span></p>
           <p class="card-text">Net Pay: <span>{{ response.netPay }}</span></p>
           <p class="card-text">Employer Rate: <span>{{response.EMPLOYER_RATE}}</span></p>
@@ -63,9 +65,51 @@
           <p class="card-text">Total Contribution: <span>{{ response.nssfTotalContribution }}</span></p>
         </div>
       </div>
-    </div>
-</div>
+    </div> -->
 
+    
+    <div class="row mt-4"  >
+      <div class="col-md-6">
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Employee Rate:</h5>
+            <p class="card-text">{{ response.EMPLOYEE_RATE }}</p>
+            <h5 class="card-title"> Employer Rate:</h5>
+            <p class="card-text">{{ response.EMPLOYER_RATE }}</p>
+           
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Employee Contribution:</h5>
+            <p class="card-text">{{ response.employeeNssfContribution}}</p>
+            <h5 class="card-title"> Employer Contribution (Gross Pay) </h5>
+            <p class="card-text">{{ response.employerNssfContribution }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title">EMPLOYEE NET PAY:</h5>
+            <p class="card-text">{{ response.netPay }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card bg-light mb-3">
+          <div class="card-body">
+            <h5 class="card-title"> NSSF TOTAL CONTRIBUTION:</h5>
+            <p class="card-text">{{ response.nssfTotalContribution }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+</div>
 <div class="container mt-5">
   <h2>How to Use the Calculator</h2>
   <p>
@@ -77,9 +121,47 @@
  in the input field and click the "Calculate Contributions" button to perform the calculation.
     The employer and employee contributions, as well as the total contribution, will be displayed.
   </p>
-
-  <footer class="bg-light text-dark text-center py-3 mt-5">
-    <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
-  </footer>
-
 </div>
+</div>
+</section>
+<!--Footer-->
+<footer class="footer mt-auto py-3 bg-dark text-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <h3 class="text-warning">Our Products</h3>
+        <ul>
+          <li><a target="_blank" href="https://www.arxcess.com/products/banking">Arxcess Banking</a></li>
+          <li><a target="_blank" href="https://erp.arxcess.com/">Arxcess ERP</a></li>
+          <li><a target="_blank" href="https://hr.arxcess.com/">Arxcess HR</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3 class="text-warning" >Our Services</h3>
+        <ul>
+          <li><a  target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
+          <li><a  target="_blank" href="/support">Support & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3 class="text-warning">Quick Links</h3>
+        <ul>
+          <li><a  href="/about">About Us</a></li>
+          <li><a target="_blank" href="https://www.arxcess.com/landing#contact">Contact Us</a></li>
+          <li><a  href="/privacy-policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h3 class="text-warning">Contacts</h3>
+        <p>Makerere Kikoni B</p>
+        <p>Kampala</p>
+        <p>Uganda</p>
+
+        <p>Email: info@arxcess.com</p>
+        <p>Phone: +256 708-774-766</p>
+      </div>
+    </div>
+    <hr> 
+    <p class="text-light text-center  ">&copy; 2023 Arxcess Software. All rights reserved.</p>
+  </div>
+</footer>

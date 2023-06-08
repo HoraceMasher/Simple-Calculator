@@ -35,21 +35,21 @@
   
  
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas offcanvas-end btn-warning" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasRightLabel">Learn More About Vat</h5>
+      <h3 class="offcanvas-title" id="offcanvasRightLabel">Learn More About VAT</h3>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <h5 class="card-title">VAT Calculation Terms and Details</h5>
+      <h2 class="card-title bg-info text-light"> VAT Calculation Terms and Details</h2>
       <p>
         The Value Added Tax (VAT) is a consumption tax levied on the value added to goods and services at each stage of production and distribution. Here are some key terms and details related to VAT calculation:
       </p>
       <ul>
-        <li><strong>Taxable Amount (NetPay):</strong> This refers to the base amount on which the VAT is calculated. It represents the net price of the goods or services before VAT is added.</li>
-        <li><strong>VAT Rate:</strong> The VAT rate is the percentage applied to the taxable amount to determine the VAT amount. It varies depending on the country and the type of goods or services.</li>
-        <li><strong>VAT Amount:</strong> This is the actual amount of VAT calculated based on the taxable amount and the VAT rate.</li>
-        <li><strong>Total Amount (NetPay + VAT Amount):</strong> The total amount is the sum of the taxable amount and the VAT amount, representing the final price including VAT.</li>
+        <li><strong><mark><h2>Taxable Amount (NetPay):</h2></mark></strong> This refers to the base amount on which the VAT is calculated. It represents the net price of the goods or services before VAT is added.</li>
+        <li><strong><mark><h2>VAT Rate: </h2></mark></strong> The VAT rate is the percentage applied to the taxable amount to determine the VAT amount. It varies depending on the country and the type of goods or services.</li>
+        <li><strong><mark><h2>VAT Amount: </h2></mark></strong>This is the actual amount of VAT calculated based on the taxable amount and the VAT rate.</li>
+        <li><strong><mark><h2>Total Amount (NetPay + VAT Amount):</h2></mark></strong> The total amount is the sum of the taxable amount and the VAT amount, representing the final price including VAT.</li>
       </ul>
       <p>
         It's important to note that VAT can be calculated in different ways depending on the jurisdiction and the nature of the transaction. Make sure to consider any specific rules or regulations applicable to your business or region.
@@ -57,6 +57,11 @@
       <p>
         For further assistance or clarification regarding VAT calculations, consult with a tax professional or refer to the official guidelines provided by your local tax authority.
       </p>
+
+      <hr>
+      <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
+      </footer>
     </div>
   </div>
   
@@ -67,9 +72,9 @@
       <div class="section">
         <h2 class="my-4">VAT Calculator</h2>
 
-        <div class="accordion">
+        <div class="accordion py-3 ">
           <button class="accordion-button" (click)="toggleAccordion()">VAT Rates and General Info</button>
-          <div class="accordion-content" *ngIf="showAccordion">
+          <div class="accordion-content pt-4" *ngIf="response">
             <p>{{ response.vatInfo }}</p>
           </div>
         </div>
@@ -144,7 +149,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <h3>Our Products</h3>
+        <h3 class="text-warning">Our Products</h3>
         <ul>
           <li><a target="_blank" href="https://www.arxcess.com/products/banking">Arxcess Banking</a></li>
           <li><a target="_blank" href="https://erp.arxcess.com/">Arxcess ERP</a></li>
@@ -152,14 +157,14 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <h3>Our Services</h3>
+        <h3 class="text-warning" >Our Services</h3>
         <ul>
           <li><a  target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
           <li><a  target="_blank" href="/support">Support & Maintenance</a></li>
         </ul>
       </div>
       <div class="col-md-3">
-        <h3>Quick Links</h3>
+        <h3 class="text-warning">Quick Links</h3>
         <ul>
           <li><a  href="/about">About Us</a></li>
           <li><a target="_blank" href="https://www.arxcess.com/landing#contact">Contact Us</a></li>
@@ -167,7 +172,7 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <h3>Contacts</h3>
+        <h3 class="text-warning">Contacts</h3>
         <p>Makerere Kikoni B</p>
         <p>Kampala</p>
         <p>Uganda</p>
