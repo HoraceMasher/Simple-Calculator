@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
     <a class="navbar-brand" routerLink="/">ArCalc</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -41,7 +41,7 @@
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <h2 class="card-title bg-info text-light"> VAT Calculation Terms and Details</h2>
+      <h2 class="card-title  bg-secondary text-light"> VAT Calculation Terms and Details</h2>
       <p>
         The Value Added Tax (VAT) is a consumption tax levied on the value added to goods and services at each stage of production and distribution. Here are some key terms and details related to VAT calculation:
       </p>
@@ -70,7 +70,7 @@
   <div class="row">
     <div class="col">
       <div class="section">
-        <h2 class="my-4">VAT Calculator</h2>
+        <h2 class=" text-center fw-bold mb-4">VAT Calculator</h2>
 
         <div class="accordion py-3 ">
           <button class="accordion-button" (click)="toggleAccordion()">VAT Rates and General Info</button>

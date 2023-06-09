@@ -35,8 +35,6 @@ export class LoanCalculatorComponent implements OnInit {
     if (this.loanForm.valid) {
       this.loanService.calculateLoan(this.loanForm.value).subscribe(
         result => {
-          this.monthlyPayment = result.monthlyPayment;
-          this.totalPayment = result.totalPayment;
           console.log(result);
           this.response = result;
         },

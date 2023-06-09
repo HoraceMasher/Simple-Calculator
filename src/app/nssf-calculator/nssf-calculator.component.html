@@ -1,5 +1,4 @@
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
     <a class="navbar-brand" routerLink="/">ArCalc</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -24,107 +23,124 @@
           <a class="nav-link" routerLink="/about">About</a>
         </li>
       </ul>
+      <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" 
+      data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+      Learn More About NSSF</button>
     </div>
   </div>
 </nav>
 
-<section>
-<div class="container col mt-5">
-  <h2>NSSF Calculator</h2>
+<div class="offcanvas offcanvas-end btn-warning" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="offcanvasRightLabel">Learn More About NSSF</h3>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <h2 class="card-title bg-secondary text-light">NSSF Calculation Terms and Details</h2>
+    <p>
+      The National Social Security Fund (NSSF) is a mandatory social security scheme that provides retirement benefits to employees in many countries. Here are some key terms and details related to NSSF calculation:
+    </p>
+    <ul>
+      <li><strong><mark> <h2>Salary:</h2></mark></strong> This is the total salary earned by an employee before any deductions.</li>
+      <li><strong><mark> <h2>Employee Contribution:</h2></mark></strong> The employee's portion of the contribution to NSSF, typically a percentage of the gross salary.</li>
+      <li><strong><mark> <h2> Employer Contribution:</h2></mark></strong> The employer's portion of the contribution to NSSF, also based on a percentage of the employee's gross salary.</li>
+      <li><strong><mark><h2>Total Contribution:</h2></mark></strong> The sum of the employee and employer contributions, representing the total amount contributed to NSSF.</li>
+    </ul>
+    <p>
+      The NSSF contribution rates and rules may vary by country or region. Make sure to consider the specific regulations applicable to your location and consult with the local social security authority for accurate calculations.
+    </p>
+    <p>
+      For further assistance or clarification regarding NSSF calculations, consult with a human resources professional or refer to the official guidelines provided by your local social security authority.
+    </p>
 
-  <div class="accordion">
-    <button class="accordion-button" (click)="toggleAccordion()">What To Know About NSSF</button>
-    <div class="accordion-content pt-3" *ngIf="response">
-      <p>{{ response.nssInfo }}</p>
+    <hr>
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+      <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
+    </footer>
+  </div>
+</div>
+
+<section class="pt-5 mt-4">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <h2 class="text-center mb-4">NSSF Calculator</h2>
+
+        <div class="accordion">
+          <button class="accordion-button" (click)="toggleAccordion()">What To Know About NSSF</button>
+          <div class="accordion-content pt-3" *ngIf="response">
+            <p>{{ response.nssInfo }}</p>
+          </div>
+        </div>
+
+        <form [formGroup]="nssfForm" (ngSubmit)="calculateNssf()" class="mt-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Gross Pay</h5>
+              <div class="form-group">
+                <label for="grossPay">Enter Gross Pay</label>
+                <input type="number" class="form-control" id="grossPay" formControlName="grossPay">
+              </div>
+              <button class="btn btn-primary mt-3" type="submit">Calculate Contributions</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result Cards -->
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Employee Rate:</h5>
+                <p class="card-text">{{ response.EMPLOYEE_RATE }}</p>
+                <h5 class="card-title">Employer Rate:</h5>
+                <p class="card-text">{{ response.EMPLOYER_RATE }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Employee Contribution:</h5>
+                <p class="card-text">{{ response.employeeNssfContribution }}</p>
+                <h5 class="card-title">Employer Contribution (Gross Pay)</h5>
+                <p class="card-text">{{ response.employerNssfContribution }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">EMPLOYEE NET PAY:</h5>
+                <p class="card-text">{{ response.netPay }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">NSSF TOTAL CONTRIBUTION:</h5>
+                <p class="card-text">{{ response.nssfTotalContribution }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5 ">
+      <h2>How to Use the Calculator</h2>
+      <p >
+        This NSSF Calculator allows you to calculate the NSSF contributions based on the given gross pay.
+      </p>
+      <p >
+        Enter the gross pay amount in the input field and click the "Calculate Contributions" button to perform the
+        calculation. The employer and employee contributions, as well as the total contribution, will be displayed.
+      </p>
     </div>
   </div>
-  <div class="row">
-    <form [formGroup]="nssfForm" (ngSubmit)="calculateNssf()" class="mt-4">
-    <div class="col">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Gross Pay</h5>
-          <div class="form-group">
-            <label for="grossPay">Enter Gross Pay</label>
-            <input type="number" class="form-control" id="grossPay" formControlName="grossPay">
-          </div>
-          <button class="btn btn-primary mt-3" type="submit">Calculate Contributions</button>
-        </div>
-      </div>
-    </div>
-    </form>
-    <!-- <div class="col" *ngIf="response">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">Result Details</h5>
-          <p class="card-text">Employee Rate: <span>{{response.EMPLOYEE_RATE}}</span></p>
-          <p class="card-text">Net Pay: <span>{{ response.netPay }}</span></p>
-          <p class="card-text">Employer Rate: <span>{{response.EMPLOYER_RATE}}</span></p>
-          <p class="card-text">Contribution: <span>{{ response.employerNssfContribution }}</span></p>
-          <p class="card-text">Employee Contribution: <span>{{ response.employeeNssfContribution }}</span></p>
-          <p class="card-text">Total Contribution: <span>{{ response.nssfTotalContribution }}</span></p>
-        </div>
-      </div>
-    </div> -->
-
-    
-    <div class="row mt-4"  >
-      <div class="col-md-6">
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Employee Rate:</h5>
-            <p class="card-text">{{ response.EMPLOYEE_RATE }}</p>
-            <h5 class="card-title"> Employer Rate:</h5>
-            <p class="card-text">{{ response.EMPLOYER_RATE }}</p>
-           
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">Employee Contribution:</h5>
-            <p class="card-text">{{ response.employeeNssfContribution}}</p>
-            <h5 class="card-title"> Employer Contribution (Gross Pay) </h5>
-            <p class="card-text">{{ response.employerNssfContribution }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title">EMPLOYEE NET PAY:</h5>
-            <p class="card-text">{{ response.netPay }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card bg-light mb-3">
-          <div class="card-body">
-            <h5 class="card-title"> NSSF TOTAL CONTRIBUTION:</h5>
-            <p class="card-text">{{ response.nssfTotalContribution }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    
-</div>
-<div class="container mt-5">
-  <h2>How to Use the Calculator</h2>
-  <p>
-    This NSSF Calculator allows you to calculate the NSSF contributions based on the given gross pay.
-  </p>
-  <p>
-    Enter the gross pay amount
-
- in the input field and click the "Calculate Contributions" button to perform the calculation.
-    The employer and employee contributions, as well as the total contribution, will be displayed.
-  </p>
-</div>
-</div>
 </section>
-<!--Footer-->
+
 <footer class="footer mt-auto py-3 bg-dark text-light">
   <div class="container">
     <div class="row">
@@ -137,18 +153,18 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <h3 class="text-warning" >Our Services</h3>
+        <h3 class="text-warning">Our Services</h3>
         <ul>
-          <li><a  target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
-          <li><a  target="_blank" href="/support">Support & Maintenance</a></li>
+          <li><a target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
+          <li><a target="_blank" href="/support">Support & Maintenance</a></li>
         </ul>
       </div>
       <div class="col-md-3">
         <h3 class="text-warning">Quick Links</h3>
         <ul>
-          <li><a  href="/about">About Us</a></li>
+          <li><a href="/about">About Us</a></li>
           <li><a target="_blank" href="https://www.arxcess.com/landing#contact">Contact Us</a></li>
-          <li><a  href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
       <div class="col-md-3">
@@ -156,12 +172,12 @@
         <p>Makerere Kikoni B</p>
         <p>Kampala</p>
         <p>Uganda</p>
-
         <p>Email: info@arxcess.com</p>
         <p>Phone: +256 708-774-766</p>
       </div>
     </div>
-    <hr> 
-    <p class="text-light text-center  ">&copy; 2023 Arxcess Software. All rights reserved.</p>
+    <hr>
+    <p class="text-light text-center">&copy; 2023 Arxcess Software. All rights reserved.</p>
   </div>
 </footer>
+
