@@ -1,11 +1,16 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
+    <!-- Brand logo with router link -->
     <a class="navbar-brand" routerLink="/">ArCalc</a>
+    
+    <!-- Toggler button for mobile navigation -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon bi bi-list"></span>
     </button>
+    
+    <!-- Navigation links -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
@@ -24,31 +29,33 @@
           <a class="nav-link" routerLink="/about">About</a>
         </li>
       </ul>
+      
+      <!-- Offcanvas button -->
       <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" 
-      data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-      Learn More About VAT</button>
+        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        Learn More About VAT
+      </button>
     </div>
   </div>
 </nav>
 
 <section>
-  
- 
-
+  <!-- Offcanvas section -->
   <div class="offcanvas offcanvas-end btn-warning" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
       <h3 class="offcanvas-title" id="offcanvasRightLabel">Learn More About VAT</h3>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <h2 class="card-title  bg-secondary text-light"> VAT Calculation Terms and Details</h2>
+      <h2 class="card-title bg-secondary text-light">VAT Calculation Terms and Details</h2>
       <p>
         The Value Added Tax (VAT) is a consumption tax levied on the value added to goods and services at each stage of production and distribution. Here are some key terms and details related to VAT calculation:
       </p>
+      <!-- VAT calculation details -->
       <ul>
         <li><strong><mark><h2>Taxable Amount (NetPay):</h2></mark></strong> This refers to the base amount on which the VAT is calculated. It represents the net price of the goods or services before VAT is added.</li>
-        <li><strong><mark><h2>VAT Rate: </h2></mark></strong> The VAT rate is the percentage applied to the taxable amount to determine the VAT amount. It varies depending on the country and the type of goods or services.</li>
-        <li><strong><mark><h2>VAT Amount: </h2></mark></strong>This is the actual amount of VAT calculated based on the taxable amount and the VAT rate.</li>
+        <li><strong><mark><h2>VAT Rate:</h2></mark></strong> The VAT rate is the percentage applied to the taxable amount to determine the VAT amount. It varies depending on the country and the type of goods or services.</li>
+        <li><strong><mark><h2>VAT Amount:</h2></mark></strong>This is the actual amount of VAT calculated based on the taxable amount and the VAT rate.</li>
         <li><strong><mark><h2>Total Amount (NetPay + VAT Amount):</h2></mark></strong> The total amount is the sum of the taxable amount and the VAT amount, representing the final price including VAT.</li>
       </ul>
       <p>
@@ -57,22 +64,22 @@
       <p>
         For further assistance or clarification regarding VAT calculations, consult with a tax professional or refer to the official guidelines provided by your local tax authority.
       </p>
-
       <hr>
       <footer class="bg-dark text-light text-center py-3 mt-5">
         <p>&copy; 2023 Arxcess Software. All rights reserved.</p>
       </footer>
     </div>
   </div>
-  
 </section>
-<section class="container ">
+
+<section class="container">
   <div class="row">
     <div class="col">
       <div class="section">
-        <h2 class=" text-center fw-bold mb-4">VAT Calculator</h2>
+        <h2 class="text-center fw-bold mb-4">VAT Calculator</h2>
 
-        <div class="accordion py-3 ">
+        <div class="accordion py-3">
+          <!-- Accordion button -->
           <button class="accordion-button" (click)="toggleAccordion()">VAT Rates and General Info</button>
           <div class="accordion-content pt-4" *ngIf="response">
             <p>{{ response.vatInfo }}</p>
@@ -81,23 +88,22 @@
 
         <form [formGroup]="vatForm" (ngSubmit)="calculateVat()">
           <div class="row g-3">
-            <div class="col-md-12">
-              <label for="amount-input" class="form-label">Amount:</label>
-              <input type="number" id="netAmount" class="form-control" formControlName="netAmount">
+            <div class="col">
+              <div class="input-group mb-3">
+                <!-- Input field and calculate button -->
+                <input type="number" class="form-control" formControlName="taxableAmount" placeholder="Enter Amount" aria-label="Amount Input" aria-describedby="amount-input">
+                <button class="btn btn-primary" type="submit" id="amount-input">Calculate</button>
+              </div>
             </div>
-          </div>
-
-          <div class="text-center mt-3">
-            <button type="submit" class="btn btn-primary">Calculate</button>
           </div>
         </form>
 
-        <div class="row mt-4"  >
+        <div class="row mt-4">
           <div class="col-md-6">
             <div class="card bg-light mb-3">
               <div class="card-body">
                 <h5 class="card-title">Taxable Amount (NetPay):</h5>
-                <p class="card-text">{{ response.taxableAmount }}</p>
+                <p class="card-text">{{ response.data.taxableAmount }}</p>
               </div>
             </div>
           </div>
@@ -105,7 +111,7 @@
             <div class="card bg-light mb-3">
               <div class="card-body">
                 <h5 class="card-title">VAT Rate(%):</h5>
-                <p class="card-text">{{ response.vatRate }}</p>
+                <p class="card-text">{{ response.data.vatRate }}</p>
               </div>
             </div>
           </div>
@@ -113,15 +119,15 @@
             <div class="card bg-light mb-3">
               <div class="card-body">
                 <h5 class="card-title">VAT Amount:</h5>
-                <p class="card-text">{{ response.vatAmount }}</p>
+                <p class="card-text">{{ response.data.vatAmount }}</p>
               </div>
             </div>
           </div>
           <div class="col-md-6">
             <div class="card bg-light mb-3">
               <div class="card-body">
-                <h5 class="card-title">Total Amount(NetPay + VatAmount):</h5>
-                <p class="card-text">{{ response.totalAmount }}</p>
+                <h5 class="card-title">Total Amount (NetPay + VatAmount):</h5>
+                <p class="card-text">{{ response.data.totalAmount }}</p>
               </div>
             </div>
           </div>
@@ -130,21 +136,18 @@
         <div class="mt-5">
           <h2>How to Use the Calculator</h2>
           <p>
-            This VAT Calculator allows you to calculate the Gross Pay, VAT Amount, and Total Amount based on the given
-            taxable amount, rate, and VAT type.
+            This VAT Calculator allows you to calculate the Gross Pay, VAT Amount, and Total Amount based on the given taxable amount, rate, and VAT type.
           </p>
           <p>
-            Enter the amount and rate in the respective input fields. Select the VAT type (VAT Added or VAT Included) from
-            the dropdown. Click the "Calculate" button to perform the calculation. The results will be displayed below.
+            Enter the amount and rate in the respective input fields. Select the VAT type (VAT Added or VAT Included) from the dropdown. Click the "Calculate" button to perform the calculation. The results will be displayed below.
           </p>
         </div>
       </div>
     </div>
-        </div>
-
+  </div>
 </section>
 
-<!--Footer-->
+<!-- Footer -->
 <footer class="footer mt-auto py-3 bg-dark text-light">
   <div class="container">
     <div class="row">
@@ -157,18 +160,18 @@
         </ul>
       </div>
       <div class="col-md-3">
-        <h3 class="text-warning" >Our Services</h3>
+        <h3 class="text-warning">Our Services</h3>
         <ul>
-          <li><a  target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
-          <li><a  target="_blank" href="/support">Support & Maintenance</a></li>
+          <li><a target="_blank" href="https://www.arxcess.com/landing#services">Services Overview</a></li>
+          <li><a target="_blank" href="/support">Support & Maintenance</a></li>
         </ul>
       </div>
       <div class="col-md-3">
         <h3 class="text-warning">Quick Links</h3>
         <ul>
-          <li><a  href="/about">About Us</a></li>
+          <li><a href="/about">About Us</a></li>
           <li><a target="_blank" href="https://www.arxcess.com/landing#contact">Contact Us</a></li>
-          <li><a  href="/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
       <div class="col-md-3">
@@ -176,12 +179,11 @@
         <p>Makerere Kikoni B</p>
         <p>Kampala</p>
         <p>Uganda</p>
-
         <p>Email: info@arxcess.com</p>
         <p>Phone: +256 708-774-766</p>
       </div>
     </div>
     <hr> 
-    <p class="text-light text-center  ">&copy; 2023 Arxcess Software. All rights reserved.</p>
+    <p class="text-light text-center">&copy; 2023 Arxcess Software. All rights reserved.</p>
   </div>
 </footer>

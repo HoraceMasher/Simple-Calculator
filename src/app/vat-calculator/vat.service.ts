@@ -12,13 +12,12 @@ export class VatService {
 
   constructor(private http: HttpClient) { }
 
-  calculateVat (vatData : any): Observable <any> {
+   calculateVat (vatData : any): Observable <any> {
     const url = (`${this.baseUrl}/calculator/vat/amount`);
-    const params = new HttpParams ()
-    .set ('netAmount', vatData.netAmount)
-
-    console.error(this.http.get(url,{params}));
-    return this.http.get(url, {params})
+    //  const params = new HttpParams ()
+    // .set ('netAmount', vatData.netAmount)
+    console.error(this.http.post(url,vatData));
+    return this.http.post(url, vatData)
 
   }
   }

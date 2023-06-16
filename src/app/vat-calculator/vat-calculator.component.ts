@@ -8,46 +8,45 @@ import { VatService } from './vat.service';
   styleUrls: ['./vat-calculator.component.css']
 })
 export class VatCalculatorComponent implements OnInit {
-  vatForm: FormGroup;
-  netAmount: number = 0;
-  vatRate: number = 0;
-  vatAmount: number = 0;
-  totalAmount: number = 0;
-  showAccordion: boolean = false;
-  vatInfo: string = '';
-  response: any;
-  imagePath = 'assets/VAT(1).png';
+  vatForm: FormGroup; // Form group to hold the form controls
+  netAmount: number = 0; // The net amount entered by the user
+  vatRate: number = 0; // The VAT rate
+  vatAmount: number = 0; // The calculated VAT amount
+  totalAmount: number = 0; // The total amount including VAT
+  showAccordion: boolean = false; // Controls the visibility of the accordion
+  vatInfo: string = ''; // Holds the VAT information
+  response: any; // Stores the response from the VAT service
 
   constructor(private vatService: VatService, private formBuilder: FormBuilder) {
     this.vatForm = this.formBuilder.group({
-      netAmount: [null, Validators.required]
+      taxableAmount: [null, Validators.required] // Creating the form control for net amount with required validation
     });
   }
 
   ngOnInit() {
     this.vatForm.valueChanges.subscribe((val: any) => {
       if (val) {
-        console.log(val);
+        console.log(val); // Logging the form value changes for debugging
       }
     });
   }
 
   toggleAccordion(): void {
-    this.showAccordion = !this.showAccordion;
+    this.showAccordion = !this.showAccordion; // Toggling the accordion visibility
   }
 
   calculateVat() {
     if (this.vatForm.valid) {
-      this.vatService.calculateVat(this.vatForm.value).subscribe(
+      this.vatService.calculateVat(this.vatForm?.value).subscribe(
         result => {
-          this.netAmount = result.netAmount;
-          this.totalAmount = result.totalAmount;
-          this.vatAmount = result.vatAmount;
-          console.log(result);
-          this.response = result;
+          this.totalAmount =result.totalAmount;
+          this.vatAmount=result.vatAmount;
+          this.vatRate = result.vatRate;
+          console.log(result); // Logging the result from the VAT service
+          this.response = result; // Storing the response in the component
         },
         error => {
-          console.error('Error Calculating VAT:', error);
+          console.error('Error Calculating VAT:', error); // Handling any errors that occur during VAT calculation
         }
       );
     }

@@ -13,12 +13,7 @@ export class LoanService {
 
   calculateLoan(loanData: any): Observable<any> {
     const url = `${this.baseUrl}/calculator/loan/monthly-payments`;
-    const params = new HttpParams()
-      .set('intervalOption', loanData.intervalOption)
-      .set('time', loanData.time)
-      .set('ratePerMonth', loanData.ratePerMonth)
-      .set('principal', loanData.principal);
-    console.log(this.http.get(url, { params }))
-    return this.http.get(url, { params });
+    console.log(this.http.post(url, loanData));
+    return this.http.post(url, loanData);
   }
 }

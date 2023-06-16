@@ -13,10 +13,10 @@ export class NssfService {
 
   calculateNssf(nssfData: any): Observable<any> {
     const url =(`${this.baseUrl}/calculator/nssf/contributions`);
-    const params = new HttpParams ()
-    .set('grossPay', nssfData.grossPay)
+    // const params = new HttpParams ()
+    // .set('grossPay', nssfData.grossPay)
 
-    console.log(this.http.get(url, {params}))
-    return this.http.get(url, {params})
+    console.log(this.http.post(url, nssfData))
+    return this.http.post(url, nssfData)
   }
   }

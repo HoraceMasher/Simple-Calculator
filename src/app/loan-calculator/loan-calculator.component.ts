@@ -18,7 +18,7 @@ export class LoanCalculatorComponent implements OnInit {
     this.loanForm =new FormGroup({
       intervalOption: new FormControl(null, Validators.required),
       principal: new FormControl(null, Validators.required),
-      ratePerMonth: new FormControl(null, Validators.required),
+      rate: new FormControl(null, Validators.required),
       time: new FormControl(null)
     });
    }
